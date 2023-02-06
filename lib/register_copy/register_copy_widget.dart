@@ -1,6 +1,8 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,33 +17,33 @@ class RegisterCopyWidget extends StatefulWidget {
 }
 
 class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
-  TextEditingController? nameController;
-  TextEditingController? textController2;
-  TextEditingController? textController3;
-  late bool passwordVisibility1;
-  TextEditingController? textController4;
-  late bool passwordVisibility2;
+  TextEditingController? confirmaSenhaController;
+  late bool confirmaSenhaVisibility;
+  TextEditingController? emailController;
+  TextEditingController? nomeController;
+  TextEditingController? senhaController;
+  late bool senhaVisibility;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    nameController = TextEditingController();
-    textController2 = TextEditingController();
-    textController3 = TextEditingController();
-    passwordVisibility1 = false;
-    textController4 = TextEditingController();
-    passwordVisibility2 = false;
+    confirmaSenhaController = TextEditingController();
+    confirmaSenhaVisibility = false;
+    emailController = TextEditingController();
+    nomeController = TextEditingController();
+    senhaController = TextEditingController();
+    senhaVisibility = false;
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
-    nameController?.dispose();
-    textController2?.dispose();
-    textController3?.dispose();
-    textController4?.dispose();
+    confirmaSenhaController?.dispose();
+    emailController?.dispose();
+    nomeController?.dispose();
+    senhaController?.dispose();
     super.dispose();
   }
 
@@ -56,81 +58,81 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).fillBotaoMenu,
           body: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).fillBotaoMenu,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Stack(
-                            children: [
-                              if (Theme.of(context).brightness ==
-                                  Brightness.light)
-                                Image.asset(
-                                  'assets/images/Biomob-01.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.7,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.1,
-                                  fit: BoxFit.contain,
-                                ),
-                              if (Theme.of(context).brightness ==
-                                  Brightness.dark)
-                                Image.asset(
-                                  'assets/images/Biomob-01_1.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.7,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.1,
-                                  fit: BoxFit.contain,
-                                ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                        child: Row(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.25,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            if (Theme.of(context).brightness ==
-                                Brightness.light)
-                              Lottie.network(
-                                'https://lottie.host/0f0c799e-e7b9-420b-8f6a-d7c985756198/Q55bs9pmxC.json',
-                                width: MediaQuery.of(context).size.width,
-                                height: 45,
-                                fit: BoxFit.cover,
-                                animate: true,
-                              ),
+                            Stack(
+                              children: [
+                                if (Theme.of(context).brightness ==
+                                    Brightness.light)
+                                  Image.asset(
+                                    'assets/images/Biomob-01.png',
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.1,
+                                    fit: BoxFit.contain,
+                                  ),
+                                if (Theme.of(context).brightness ==
+                                    Brightness.dark)
+                                  Image.asset(
+                                    'assets/images/Biomob-01_1.png',
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.1,
+                                    fit: BoxFit.contain,
+                                  ),
+                              ],
+                            ),
                           ],
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (Theme.of(context).brightness ==
+                                  Brightness.light)
+                                Lottie.network(
+                                  'https://lottie.host/0f0c799e-e7b9-420b-8f6a-d7c985756198/Q55bs9pmxC.json',
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 45,
+                                  fit: BoxFit.cover,
+                                  animate: true,
+                                ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 1,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).cor1,
-                  ),
-                  child: Form(
-                    key: formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
-                    child: SingleChildScrollView(
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 1,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).cor1,
+                    ),
+                    child: Form(
+                      key: formKey,
+                      autovalidateMode: AutovalidateMode.disabled,
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -152,75 +154,60 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 25, 0, 30),
+                                EdgeInsetsDirectional.fromSTEB(0, 30, 0, 25),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      1, 1, 1, 1),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.85,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: nameController,
+                                      controller: nomeController,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: 'Nome completo',
-                                        hintText: 'Insira seu nome...',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText1
+                                            .bodyText2
                                             .override(
                                               fontFamily: 'Lexend Deca',
-                                              color: Color(0x9AFFFFFF),
+                                              color: Color(0xFF1D4F9A),
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         filled: true,
                                         fillColor:
                                             FlutterFlowTheme.of(context).cor2,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0, 10, 0, 0),
                                         prefixIcon: Icon(
                                           Icons.person,
                                           color: FlutterFlowTheme.of(context)
@@ -231,16 +218,13 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                           .bodyText1
                                           .override(
                                             fontFamily: 'Lexend Deca',
-                                            color: Colors.white,
+                                            color: Color(0xFFFBFBFB),
+                                            fontWeight: FontWeight.w600,
                                           ),
                                       keyboardType: TextInputType.name,
                                       validator: (val) {
                                         if (val == null || val.isEmpty) {
-                                          return 'Campo obrigatório.';
-                                        }
-
-                                        if (val.length < 3) {
-                                          return 'Requires at least 3 characters.';
+                                          return 'Campo obrigatório!';
                                         }
 
                                         return null;
@@ -253,77 +237,62 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 25),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      1, 1, 1, 1),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.85,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: textController2,
+                                      controller: emailController,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: 'E-mail',
-                                        hintText: 'Insira seu email...',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText1
+                                            .bodyText2
                                             .override(
                                               fontFamily: 'Lexend Deca',
-                                              color: Color(0x9AFFFFFF),
+                                              color: Color(0xFF1D4F9A),
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         filled: true,
                                         fillColor:
                                             FlutterFlowTheme.of(context).cor2,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0, 10, 0, 0),
                                         prefixIcon: Icon(
-                                          Icons.email_outlined,
+                                          Icons.mail,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                         ),
@@ -332,17 +301,18 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                           .bodyText1
                                           .override(
                                             fontFamily: 'Lexend Deca',
-                                            color: Colors.white,
+                                            color: Color(0xFFFBFBFB),
+                                            fontWeight: FontWeight.w600,
                                           ),
-                                      keyboardType: TextInputType.emailAddress,
+                                      keyboardType: TextInputType.name,
                                       validator: (val) {
                                         if (val == null || val.isEmpty) {
-                                          return 'Campo obrigatório.';
+                                          return 'Campo obrigatório!';
                                         }
 
                                         if (!RegExp(kTextValidatorEmailRegex)
                                             .hasMatch(val)) {
-                                          return 'E-mail inválido.';
+                                          return 'Email inválido';
                                         }
                                         return null;
                                       },
@@ -354,75 +324,65 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 25),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      1, 1, 1, 1),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.85,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: textController3,
-                                      obscureText: !passwordVisibility1,
+                                      controller: senhaController,
+                                      onChanged: (_) => EasyDebounce.debounce(
+                                        'senhaController',
+                                        Duration(milliseconds: 100),
+                                        () => setState(() {}),
+                                      ),
+                                      obscureText: !senhaVisibility,
                                       decoration: InputDecoration(
                                         labelText: 'Senha',
-                                        hintText: 'Insira sua senha...',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText1
+                                            .bodyText2
                                             .override(
                                               fontFamily: 'Lexend Deca',
-                                              color: Color(0x9AFFFFFF),
+                                              color: Color(0xFF1D4F9A),
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         filled: true,
                                         fillColor:
                                             FlutterFlowTheme.of(context).cor2,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0, 10, 0, 0),
                                         prefixIcon: Icon(
                                           Icons.vpn_key,
                                           color: FlutterFlowTheme.of(context)
@@ -430,16 +390,16 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                         ),
                                         suffixIcon: InkWell(
                                           onTap: () => setState(
-                                            () => passwordVisibility1 =
-                                                !passwordVisibility1,
+                                            () => senhaVisibility =
+                                                !senhaVisibility,
                                           ),
                                           focusNode:
                                               FocusNode(skipTraversal: true),
                                           child: Icon(
-                                            passwordVisibility1
+                                            senhaVisibility
                                                 ? Icons.visibility_outlined
                                                 : Icons.visibility_off_outlined,
-                                            color: Colors.white,
+                                            color: Color(0xFF757575),
                                             size: 22,
                                           ),
                                         ),
@@ -448,13 +408,13 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                           .bodyText1
                                           .override(
                                             fontFamily: 'Lexend Deca',
-                                            color: Colors.white,
+                                            color: Color(0xFFFBFBFB),
+                                            fontWeight: FontWeight.w600,
                                           ),
-                                      keyboardType:
-                                          TextInputType.visiblePassword,
+                                      keyboardType: TextInputType.name,
                                       validator: (val) {
                                         if (val == null || val.isEmpty) {
-                                          return 'Campo obrigatório.';
+                                          return 'Campo obrigatório!';
                                         }
 
                                         if (val.length < 6) {
@@ -470,76 +430,65 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      1, 1, 1, 1),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.85,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: textController4,
-                                      obscureText: !passwordVisibility2,
+                                      controller: confirmaSenhaController,
+                                      onChanged: (_) => EasyDebounce.debounce(
+                                        'confirmaSenhaController',
+                                        Duration(milliseconds: 100),
+                                        () => setState(() {}),
+                                      ),
+                                      obscureText: !confirmaSenhaVisibility,
                                       decoration: InputDecoration(
-                                        labelText: 'Confirmar senha',
-                                        hintText: 'Confirmar sua senha...',
+                                        labelText: 'Confirmar Senha',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText1
+                                            .bodyText2
                                             .override(
                                               fontFamily: 'Lexend Deca',
-                                              color: Color(0x9AFFFFFF),
+                                              color: Color(0xFF1D4F9A),
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconeBotao,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFFF00000),
                                             width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(30),
                                         ),
                                         filled: true,
                                         fillColor:
                                             FlutterFlowTheme.of(context).cor2,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0, 10, 0, 0),
                                         prefixIcon: Icon(
                                           Icons.vpn_key,
                                           color: FlutterFlowTheme.of(context)
@@ -547,16 +496,16 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                         ),
                                         suffixIcon: InkWell(
                                           onTap: () => setState(
-                                            () => passwordVisibility2 =
-                                                !passwordVisibility2,
+                                            () => confirmaSenhaVisibility =
+                                                !confirmaSenhaVisibility,
                                           ),
                                           focusNode:
                                               FocusNode(skipTraversal: true),
                                           child: Icon(
-                                            passwordVisibility2
+                                            confirmaSenhaVisibility
                                                 ? Icons.visibility_outlined
                                                 : Icons.visibility_off_outlined,
-                                            color: Colors.white,
+                                            color: Color(0xFF757575),
                                             size: 22,
                                           ),
                                         ),
@@ -565,70 +514,178 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                           .bodyText1
                                           .override(
                                             fontFamily: 'Lexend Deca',
-                                            color: Colors.white,
+                                            color: Color(0xFFFBFBFB),
+                                            fontWeight: FontWeight.w600,
                                           ),
-                                      keyboardType:
-                                          TextInputType.visiblePassword,
+                                      keyboardType: TextInputType.name,
+                                      validator: (val) {
+                                        if (val == null || val.isEmpty) {
+                                          return 'Campo obrigatório!';
+                                        }
+
+                                        return null;
+                                      },
                                     ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  if (formKey.currentState == null ||
-                                      !formKey.currentState!.validate()) {
-                                    return;
-                                  }
-
-                                  FFAppState().update(() {
-                                    FFAppState().nome = nameController!.text;
-                                    FFAppState().email = textController2!.text;
-                                  });
-                                  FFAppState().update(() {
-                                    FFAppState().senha = textController3!.text;
-                                  });
-
-                                  context.pushNamed('InfoAdicionalCopy');
-                                },
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.85,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.05,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .fillBotaoMenu,
-                                    borderRadius: BorderRadius.circular(10),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(25, 0, 25, 25),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                if (!functions.validaSenha(
+                                    senhaController!.text,
+                                    confirmaSenhaController!.text))
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 10, 0),
+                                    child: Icon(
+                                      Icons.do_not_disturb_on,
+                                      color: Color(0xFF828181),
+                                      size: 20,
+                                    ),
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Avançar',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .iconeBotao,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                if (functions.validaSenha(senhaController!.text,
+                                    confirmaSenhaController!.text))
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 10, 0),
+                                    child: Icon(
+                                      Icons.check_circle,
+                                      color: Color(0xFF4747CF),
+                                      size: 20,
+                                    ),
+                                  ),
+                                SelectionArea(
+                                    child: Text(
+                                  'Senhas iguais',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                    ],
+                                )),
+                              ],
+                            ),
+                          ),
+                          if (functions.validaSenha(senhaController!.text,
+                              confirmaSenhaController!.text))
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    if (formKey.currentState == null ||
+                                        !formKey.currentState!.validate()) {
+                                      return;
+                                    }
+
+                                    FFAppState().update(() {
+                                      FFAppState().nome = nomeController!.text;
+                                      FFAppState().email =
+                                          emailController!.text;
+                                    });
+                                    FFAppState().update(() {
+                                      FFAppState().senha =
+                                          senhaController!.text;
+                                    });
+
+                                    context.pushNamed('InfoAdicionalCopy');
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.85,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .fillBotaoMenu,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Avançar',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .iconeBotao,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          if (!functions.validaSenha(senhaController!.text,
+                              confirmaSenhaController!.text))
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Senhas diferentes!',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0xFFC65656),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.85,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFC6C6C6),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Avançar',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .iconeBotao,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 45, 0, 0),
@@ -673,7 +730,7 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 30, 20, 50),
+                                EdgeInsetsDirectional.fromSTEB(20, 30, 20, 40),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -714,8 +771,8 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ));

@@ -619,7 +619,7 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        height: MediaQuery.of(context).size.height * 1,
                         decoration: BoxDecoration(
                           color: Colors.white,
                         ),

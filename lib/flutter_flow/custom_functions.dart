@@ -68,3 +68,14 @@ bool? searchBar(
 ) {
   return textSearchIn?.toLowerCase().contains(textSearchFor!.toLowerCase());
 }
+
+bool validaSenha(
+  String password,
+  String passwordTwo,
+) {
+  if (password == passwordTwo && password.length > 6) {
+    return true;
+  } else {
+    return false;
+  }
+}

@@ -101,6 +101,34 @@ class _HomePageWidgetState extends State<HomePageWidget>
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).cor5,
             automaticallyImplyLeading: false,
+            leading: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (Theme.of(context).brightness == Brightness.dark)
+                  InkWell(
+                    onTap: () async {
+                      setDarkModeSetting(context, ThemeMode.light);
+                    },
+                    child: Icon(
+                      Icons.lightbulb,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                if (Theme.of(context).brightness == Brightness.light)
+                  InkWell(
+                    onTap: () async {
+                      setDarkModeSetting(context, ThemeMode.dark);
+                    },
+                    child: FaIcon(
+                      FontAwesomeIcons.solidMoon,
+                      color: Colors.white,
+                      size: 26,
+                    ),
+                  ),
+              ],
+            ),
             title: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
               child: Image.asset(
@@ -111,31 +139,36 @@ class _HomePageWidgetState extends State<HomePageWidget>
               ),
             ),
             actions: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                child: InkWell(
-                  onTap: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.8,
-                            child: TutorialCompletoWidget(),
-                          ),
-                        );
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+                    child: InkWell(
+                      onTap: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height * 0.8,
+                                child: TutorialCompletoWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
                       },
-                    ).then((value) => setState(() {}));
-                  },
-                  child: Icon(
-                    Icons.help_outline,
-                    color: Colors.white,
-                    size: 30,
+                      child: Icon(
+                        Icons.help_outline,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
             centerTitle: true,
