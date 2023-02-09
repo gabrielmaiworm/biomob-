@@ -638,20 +638,23 @@ class _EventosWidgetState extends State<EventosWidget> {
                                                                     size: 24,
                                                                   ),
                                                                 ),
-                                                                Text(
-                                                                  getJsonField(
-                                                                    listaEventosItem,
-                                                                    r'''$..local''',
-                                                                  ).toString(),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Lexend Deca',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .cinzaBranco,
-                                                                      ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    getJsonField(
+                                                                      listaEventosItem,
+                                                                      r'''$..local''',
+                                                                    ).toString(),
+                                                                    maxLines: 2,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Lexend Deca',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).cinzaBranco,
+                                                                        ),
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),
@@ -714,7 +717,7 @@ class _EventosWidgetState extends State<EventosWidget> {
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 0, 0, 5),
+                                                                  0, 0, 0, 10),
                                                       child: Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
