@@ -1,3 +1,4 @@
+import '../components/redirecionar_widget.dart';
 import '../components/tutorial_completo_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -92,8 +93,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
             },
             backgroundColor: Colors.white,
             elevation: 8,
-            child: FaIcon(
-              FontAwesomeIcons.plus,
+            child: Icon(
+              Icons.menu,
               color: Color(0xFF42BEA4),
               size: 30,
             ),
@@ -601,48 +602,93 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 15, 0, 0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.38,
+                                              height: MediaQuery.of(context).size.height * 0.15,
+                                              decoration: BoxDecoration(
+                                                color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor: Colors.transparent,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(context).viewInsets,
+                                                        child: Container(
+                                                          height: MediaQuery.of(context).size.height * 0.7,
+                                                          child: RedirecionarWidget(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) => setState(() {}));
+                                                },
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    FaIcon(
+                                                      FontAwesomeIcons.theaterMasks,
+                                                      color: FlutterFlowTheme.of(context).cor1,
+                                                      size: 55,
+                                                    ),
+                                                    Column(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          'Vagas de',
+                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                fontFamily: 'Lexend Deca',
+                                                                color: FlutterFlowTheme.of(context).textoBotao,
+                                                                fontSize: 15,
+                                                                fontWeight: FontWeight.w600,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          'Ator',
+                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                fontFamily: 'Lexend Deca',
+                                                                color: FlutterFlowTheme.of(context).textoBotao,
+                                                                fontSize: 15,
+                                                                fontWeight: FontWeight.w600,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
                                             InkWell(
                                               onTap: () async {
                                                 context.pushNamed('HomePage');
                                               },
                                               child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.85,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.15,
+                                                width: MediaQuery.of(context).size.width * 0.38,
+                                                height: MediaQuery.of(context).size.height * 0.15,
                                                 decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .fillBotaoMenu,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
+                                                  color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                                                  borderRadius: BorderRadius.circular(8),
                                                 ),
                                                 child: InkWell(
                                                   onTap: () async {
                                                     await showDialog(
                                                       context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
+                                                      builder: (alertDialogContext) {
                                                         return AlertDialog(
                                                           title: Text('Alerta'),
-                                                          content: Text(
-                                                              'Funcionalidade em desenvolvimento!'),
+                                                          content: Text('Funcionalidade em desenvolvimento!'),
                                                           actions: [
                                                             TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
+                                                              onPressed: () => Navigator.pop(alertDialogContext),
                                                               child: Text('Ok'),
                                                             ),
                                                           ],
@@ -651,43 +697,23 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     );
                                                   },
                                                   child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Image.asset(
                                                         'assets/images/iconfinder-volume-max-sound-speaker-audio-4593170_122277_1.png',
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.2,
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.08,
+                                                        width: MediaQuery.of(context).size.width * 0.2,
+                                                        height: MediaQuery.of(context).size.height * 0.08,
                                                         fit: BoxFit.contain,
                                                       ),
                                                       Text(
                                                         'Áudio Guia',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Lexend Deca',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .textoBotao,
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                ),
+                                                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                              fontFamily: 'Lexend Deca',
+                                                              color: FlutterFlowTheme.of(context).textoBotao,
+                                                              fontSize: 15,
+                                                              fontWeight: FontWeight.w600,
+                                                            ),
                                                       ),
                                                     ],
                                                   ),
@@ -696,7 +722,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             ),
                                           ],
                                         ),
-                                      ),
+                                      ), 
                                     ],
                                   ),
                                 ),

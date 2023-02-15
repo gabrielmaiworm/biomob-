@@ -126,7 +126,7 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 1,
+                    height: MediaQuery.of(context).size.height * 0.75,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).cor1,
                     ),
@@ -531,26 +531,14 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(25, 0, 25, 25),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                if (!functions.validaSenha(
-                                    senhaController!.text,
-                                    confirmaSenhaController!.text))
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 10, 0),
-                                    child: Icon(
-                                      Icons.do_not_disturb_on,
-                                      color: Color(0xFF828181),
-                                      size: 20,
-                                    ),
-                                  ),
-                                if (functions.validaSenha(senhaController!.text,
-                                    confirmaSenhaController!.text))
+                          if (functions.validaSenha(senhaController!.text,
+                              confirmaSenhaController!.text))
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(25, 0, 25, 25),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 10, 0),
@@ -560,19 +548,19 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                       size: 20,
                                     ),
                                   ),
-                                SelectionArea(
-                                    child: Text(
-                                  'Senhas iguais',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                )),
-                              ],
+                                  SelectionArea(
+                                      child: Text(
+                                    'Senhas iguais',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  )),
+                                ],
+                              ),
                             ),
-                          ),
                           if (functions.validaSenha(senhaController!.text,
                               confirmaSenhaController!.text))
                             Row(
