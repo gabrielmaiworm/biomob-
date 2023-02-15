@@ -360,7 +360,7 @@ class _EventosWidgetState extends State<EventosWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  10, 0, 10, 15),
+                                                  10, 0, 10, 30),
                                           child: FlipCard(
                                             fill: Fill.fillBack,
                                             direction: FlipDirection.HORIZONTAL,
@@ -370,7 +370,7 @@ class _EventosWidgetState extends State<EventosWidget> {
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.25,
+                                                  0.32,
                                               decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)

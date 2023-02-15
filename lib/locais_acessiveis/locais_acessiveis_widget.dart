@@ -423,10 +423,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                                     MainAxisAlignment
                                                         .spaceAround,
                                                 children: [
-                                                  FaIcon(
-                                                    FontAwesomeIcons.bed,
-                                                    color: Color(0xFF8F8E8E),
-                                                    size: 24,
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.bed,
+                                                      color: Color(0xFF8F8E8E),
+                                                      size: 24,
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Text(
@@ -485,10 +488,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
                                               children: [
-                                                FaIcon(
-                                                  FontAwesomeIcons.bed,
-                                                  color: Colors.white,
-                                                  size: 24,
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons.bed,
+                                                    color: Colors.white,
+                                                    size: 24,
+                                                  ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
@@ -693,11 +699,14 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                                     MainAxisAlignment
                                                         .spaceAround,
                                                 children: [
-                                                  FaIcon(
-                                                    FontAwesomeIcons
-                                                        .briefcaseMedical,
-                                                    color: Color(0xFF8F8E8E),
-                                                    size: 24,
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons
+                                                          .briefcaseMedical,
+                                                      color: Color(0xFF8F8E8E),
+                                                      size: 24,
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Text(
@@ -756,11 +765,14 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
                                               children: [
-                                                FaIcon(
-                                                  FontAwesomeIcons
-                                                      .briefcaseMedical,
-                                                  color: Colors.white,
-                                                  size: 24,
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons
+                                                        .briefcaseMedical,
+                                                    color: Colors.white,
+                                                    size: 24,
+                                                  ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
@@ -828,10 +840,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                                     MainAxisAlignment
                                                         .spaceEvenly,
                                                 children: [
-                                                  FaIcon(
-                                                    FontAwesomeIcons.wrench,
-                                                    color: Color(0xFF8F8E8E),
-                                                    size: 24,
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.wrench,
+                                                      color: Color(0xFF8F8E8E),
+                                                      size: 24,
+                                                    ),
                                                   ),
                                                   Text(
                                                     'Serviços',
@@ -887,10 +902,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                FaIcon(
-                                                  FontAwesomeIcons.wrench,
-                                                  color: Colors.white,
-                                                  size: 24,
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons.wrench,
+                                                    color: Colors.white,
+                                                    size: 24,
+                                                  ),
                                                 ),
                                                 Text(
                                                   'Serviços',
@@ -956,10 +974,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                                     MainAxisAlignment
                                                         .spaceEvenly,
                                                 children: [
-                                                  FaIcon(
-                                                    FontAwesomeIcons.tshirt,
-                                                    color: Color(0xFF8F8E8E),
-                                                    size: 24,
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.tshirt,
+                                                      color: Color(0xFF8F8E8E),
+                                                      size: 24,
+                                                    ),
                                                   ),
                                                   Text(
                                                     'Varejo',
@@ -1015,10 +1036,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                FaIcon(
-                                                  FontAwesomeIcons.tshirt,
-                                                  color: Colors.white,
-                                                  size: 24,
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons.tshirt,
+                                                    color: Colors.white,
+                                                    size: 24,
+                                                  ),
                                                 ),
                                                 Text(
                                                   'Varejo',
@@ -1215,10 +1239,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                                     MainAxisAlignment
                                                         .spaceAround,
                                                 children: [
-                                                  FaIcon(
-                                                    FontAwesomeIcons.bus,
-                                                    color: Color(0xFF8F8E8E),
-                                                    size: 24,
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.bus,
+                                                      color: Color(0xFF8F8E8E),
+                                                      size: 24,
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Text(
@@ -1279,10 +1306,13 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
                                               children: [
-                                                FaIcon(
-                                                  FontAwesomeIcons.bus,
-                                                  color: Colors.white,
-                                                  size: 24,
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons.bus,
+                                                    color: Colors.white,
+                                                    size: 24,
+                                                  ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
@@ -1515,124 +1545,148 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                                             ),
                                           ],
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5, 5, 5, 0),
-                                          child: Row(
+                                          Row(
                                             mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(
-                                                child: Text(
-                                                  getJsonField(
-                                                    listaEstabelecimentosItem,
-                                                    r'''$..name''',
-                                                  )
-                                                      .toString()
-                                                      .maybeHandleOverflow(
-                                                        maxChars: 30,
-                                                        replacement: '…',
-                                                      ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color: Colors.black,
-                                                        fontSize: 17,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5, 5, 10, 0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                child: Text(
-                                                  getJsonField(
-                                                    listaEstabelecimentosItem,
-                                                    r'''$..formatted_address''',
-                                                  )
-                                                      .toString()
-                                                      .maybeHandleOverflow(
-                                                        maxChars: 40,
-                                                        replacement: '…',
-                                                      ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .cor1,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
-                                              Icon(
-                                                Icons.location_pin,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .cor1,
-                                                size: 28,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        if (getJsonField(
-                                              listaEstabelecimentosItem,
-                                              r'''$..biomobStarAverage''',
-                                            ) !=
-                                            null)
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 5, 10, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 5, 0),
-                                                  child: Text(
-                                                    getJsonField(
-                                                      listaEstabelecimentosItem,
-                                                      r'''$..biomobStarAverage''',
-                                                    ).toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.black,
-                                                          fontSize: 23,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
+                                                        child: Row(
+                                                          mainAxisSize: MainAxisSize.max,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Text(
+                                                                getJsonField(
+                                                                  listaEstabelecimentosItem,
+                                                                  r'''$..name''',
+                                                                ).toString().maybeHandleOverflow(
+                                                                      maxChars: 30,
+                                                                      replacement: '…',
+                                                                    ),
+                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                      fontFamily: 'Poppins',
+                                                                      color: Colors.black,
+                                                                      fontSize: 16,
+                                                                      fontWeight: FontWeight.w600,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsetsDirectional.fromSTEB(5, 5, 10, 0),
+                                                        child: Row(
+                                                          mainAxisSize: MainAxisSize.max,
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Padding(
+                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                                                              child: Icon(
+                                                                Icons.location_pin,
+                                                                color: FlutterFlowTheme.of(context).cor1,
+                                                                size: 25,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Text(
+                                                                getJsonField(
+                                                                  listaEstabelecimentosItem,
+                                                                  r'''$..formatted_address''',
+                                                                ).toString().maybeHandleOverflow(
+                                                                      maxChars: 40,
+                                                                      replacement: '…',
+                                                                    ),
+                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                      fontFamily: 'Poppins',
+                                                                      color: FlutterFlowTheme.of(context).cor1,
+                                                                      fontSize: 14,
+                                                                      fontWeight: FontWeight.w500,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                Icon(
-                                                  Icons.star_sharp,
-                                                  color: Color(0xFFCFAD03),
-                                                  size: 32,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(5, 0, 10, 0),
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Stack(
+                                                      children: [
+                                                        if (teste ==
+                                                            0)
+                                                          Icon(
+                                                            Icons.sentiment_neutral_rounded,
+                                                            color: Color(0xFF767676),
+                                                            size: 32,
+                                                          ),
+                                                        if (teste
+                                                            >=
+                                                            3)
+                                                          Icon(
+                                                            Icons.sentiment_satisfied_rounded,
+                                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                                            size: 32,
+                                                          ),
+                                                        
+                                                        if (teste <
+                                                            3 && teste > 0)
+                                                          Icon(
+                                                            Icons.sentiment_dissatisfied_rounded,
+                                                            color: Color(0xFFC64340),
+                                                            size: 32,
+                                                          ),
+                                                      ],
+                                                    ),
+                                                    if (teste ==
+                                                            0)
+                                                           Text(
+                                                     "Sem avaliações",
+                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                            fontFamily: 'Lexend Deca',
+                                                            color: Color(0xFF767676),
+                                                            fontSize: 11,
+                                                          ),
+                                                    ),
+                                                        if (teste
+                                                            >=
+                                                            3)
+                                                          Text(
+                                                     "Acessível",
+                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                            fontFamily: 'Lexend Deca',
+                                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                                            fontSize: 11,
+                                                          ),
+                                                          ),
+                                                        if (teste <
+                                                            3 && teste > 0)
+                                                          Text(
+                                                     "Não Acessível",
+                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                            fontFamily: 'Lexend Deca',
+                                                            color: Color(0xFFC64340),
+                                                            fontSize: 11,
+                                                          ),
+                                                        ),   
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                       ],
                                     ),

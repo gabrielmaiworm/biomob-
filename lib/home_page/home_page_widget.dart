@@ -81,20 +81,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
           backgroundColor: FlutterFlowTheme.of(context).cor5,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
-              if (FFAppState().openMenu == '1') {
-                FFAppState().update(() {
-                  FFAppState().openMenu = '2';
-                });
-              } else {
-                FFAppState().update(() {
-                  FFAppState().openMenu = '1';
-                });
-              }
+              context.pushNamed('MeuPerfil');
             },
             backgroundColor: Colors.white,
             elevation: 8,
             child: Icon(
-              Icons.menu,
+              Icons.person,
               color: Color(0xFF42BEA4),
               size: 30,
             ),

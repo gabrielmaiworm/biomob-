@@ -52,6 +52,60 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
+    var biomobEntradaAverage = getJsonField(
+      widget.detalhes,
+      r'''$..biomobEntradaAverage''',
+      );
+
+      if (biomobEntradaAverage == null) {
+      biomobEntradaAverage = 0;
+      }
+
+      var biomobBanheiroAverage = getJsonField(
+      widget.detalhes,
+      r'''$..biomobBanheiroAverage''',
+      );
+
+      if (biomobBanheiroAverage == null) {
+      biomobBanheiroAverage = 0;
+      }
+
+      var biomobEstacionamentoAverage = getJsonField(
+      widget.detalhes,
+      r'''$..biomobEstacionamentoAverage''',
+      );
+
+      if (biomobEstacionamentoAverage == null) {
+      biomobEstacionamentoAverage = 0;
+      }
+
+      var biomobCirculacaoAverage = getJsonField(
+      widget.detalhes,
+      r'''$..biomobCirculacaoAverage''',
+      );
+
+      if (biomobCirculacaoAverage == null) {
+      biomobCirculacaoAverage = 0;
+      }
+
+      var biomobCalcadaAverage = getJsonField(
+      widget.detalhes,
+      r'''$..biomobCalcadaAverage''',
+      );
+
+      if (biomobCalcadaAverage == null) {
+      biomobCalcadaAverage = 0;
+      }
+
+      var biomobAudioVisualAverage = getJsonField(
+      widget.detalhes,
+      r'''$..biomobAudioVisualAverage''',
+      );
+
+      if (biomobAudioVisualAverage == null) {
+      biomobAudioVisualAverage = 0;
+      }
+
     return Title(
         title: 'Estabelecimento',
         color: FlutterFlowTheme.of(context).primaryColor,
@@ -771,20 +825,12 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
                                                       children: [
                                                         Text(
                                                           () {
-                                                            if (getJsonField(
-                                                                  widget
-                                                                      .detalhes,
-                                                                  r'''$..biomobEntradaAverage''',
-                                                                ) ==
+                                                            if (biomobEntradaAverage >=
                                                                 FFAppState()
                                                                     .tres) {
                                                               return 'Acessível';
-                                                            } else if (getJsonField(
-                                                                  widget
-                                                                      .detalhes,
-                                                                  r'''$..biomobEntradaAverage''',
-                                                                ) !=
-                                                                null) {
+                                                            } else if (biomobEntradaAverage <
+                                                                3 && biomobEntradaAverage > 0) {
                                                               return 'Não Acessível';
                                                             } else {
                                                               return 'Sem avaliações';
@@ -918,17 +964,11 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
                                                   children: [
                                                     Text(
                                                       () {
-                                                        if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobBanheiroAverage''',
-                                                            ) ==
+                                                        if (biomobBanheiroAverage >=
                                                             FFAppState().tres) {
                                                           return 'Acessível';
-                                                        } else if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobBanheiroAverage''',
-                                                            ) !=
-                                                            null) {
+                                                        } else if (biomobBanheiroAverage <
+                                                            3 && biomobBanheiroAverage > 0) {
                                                           return 'Não Acessível';
                                                         } else {
                                                           return 'Sem avaliações';
@@ -1074,17 +1114,11 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
                                                   children: [
                                                     Text(
                                                       () {
-                                                        if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobEstacionamentoAverage''',
-                                                            ) ==
+                                                        if (biomobEstacionamentoAverage >=
                                                             FFAppState().tres) {
                                                           return 'Acessível';
-                                                        } else if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobEstacionamentoAverage''',
-                                                            ) !=
-                                                            null) {
+                                                        } else if (biomobEstacionamentoAverage <
+                                                            3 && biomobEstacionamentoAverage > 0) {
                                                           return 'Não Acessível';
                                                         } else {
                                                           return 'Sem avaliações';
@@ -1219,17 +1253,11 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
                                                   children: [
                                                     Text(
                                                       () {
-                                                        if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobCirculacaoAverage''',
-                                                            ) ==
-                                                            FFAppState().tres) {
+                                                        if (biomobCirculacaoAverage >=
+                                                            3) {
                                                           return 'Acessível';
-                                                        } else if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobCirculacaoAverage''',
-                                                            ) !=
-                                                            null) {
+                                                        } else if (biomobCirculacaoAverage <
+                                                            3 && biomobCirculacaoAverage > 0) {
                                                           return 'Não Acessível';
                                                         } else {
                                                           return 'Sem avaliações';
@@ -1373,17 +1401,11 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
                                                   children: [
                                                     Text(
                                                       () {
-                                                        if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobCalcadaAverage''',
-                                                            ) ==
-                                                            FFAppState().tres) {
+                                                        if (biomobCalcadaAverage >=
+                                                            3) {
                                                           return 'Acessível';
-                                                        } else if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobCalcadaAverage''',
-                                                            ) !=
-                                                            null) {
+                                                        } else if (biomobCalcadaAverage <
+                                                            3 && biomobCalcadaAverage > 0) {
                                                           return 'Não Acessível';
                                                         } else {
                                                           return 'Sem avaliações';
@@ -1516,17 +1538,11 @@ class _EstabelecimentoWidgetState extends State<EstabelecimentoWidget> {
                                                   children: [
                                                     Text(
                                                       () {
-                                                        if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobAudioVisualAverage''',
-                                                            ) ==
+                                                        if (biomobAudioVisualAverage >=
                                                             FFAppState().tres) {
                                                           return 'Acessível';
-                                                        } else if (getJsonField(
-                                                              widget.detalhes,
-                                                              r'''$..biomobAudioVisualAverage''',
-                                                            ) !=
-                                                            null) {
+                                                        } else if (biomobAudioVisualAverage <
+                                                            3 && biomobAudioVisualAverage > 0) {
                                                           return 'Não Acessível';
                                                         } else {
                                                           return 'Sem avaliações';
