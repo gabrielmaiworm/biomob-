@@ -21,6 +21,9 @@ class FFAppState extends ChangeNotifier {
         prefs.getString('ff_calcadaReferencia')?.ref ?? _calcadaReferencia;
     _Acessivel = prefs.getDouble('ff_Acessivel') ?? _Acessivel;
     _NaoPossui = prefs.getDouble('ff_NaoPossui') ?? _NaoPossui;
+    _nomePersist = prefs.getString('ff_nomePersist') ?? _nomePersist;
+    _emailPersist = prefs.getString('ff_emailPersist') ?? _emailPersist;
+    _fotoPersist = prefs.getString('ff_fotoPersist') ?? _fotoPersist;
   }
 
   void update(VoidCallback callback) {
@@ -203,7 +206,7 @@ class FFAppState extends ChangeNotifier {
     _deep = _value;
   }
 
-  double _avaliacaoNota = 5.0;
+  double _avaliacaoNota = 0.0;
   double get avaliacaoNota => _avaliacaoNota;
   set avaliacaoNota(double _value) {
     _avaliacaoNota = _value;
@@ -273,6 +276,27 @@ class FFAppState extends ChangeNotifier {
   String get busca => _busca;
   set busca(String _value) {
     _busca = _value;
+  }
+
+  String _nomePersist = '';
+  String get nomePersist => _nomePersist;
+  set nomePersist(String _value) {
+    _nomePersist = _value;
+    prefs.setString('ff_nomePersist', _value);
+  }
+
+  String _emailPersist = '';
+  String get emailPersist => _emailPersist;
+  set emailPersist(String _value) {
+    _emailPersist = _value;
+    prefs.setString('ff_emailPersist', _value);
+  }
+
+  String _fotoPersist = '';
+  String get fotoPersist => _fotoPersist;
+  set fotoPersist(String _value) {
+    _fotoPersist = _value;
+    prefs.setString('ff_fotoPersist', _value);
   }
 }
 

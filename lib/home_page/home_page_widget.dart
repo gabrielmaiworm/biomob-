@@ -265,6 +265,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 onTap: () async {
                                                   context.pushNamed(
                                                       'LocaisAcessiveis');
+                                                  setState(() {
+                                                    FFAppState().categoria = 'lodging';
+                                                    FFAppState().choiceType = 'lodging';
+                                                    FFAppState().avaliacaoNota = 5;
+                                                  });
                                                 },
                                                 child: Column(
                                                   mainAxisSize:
@@ -629,7 +634,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   children: [
                                                     FaIcon(
                                                       FontAwesomeIcons.theaterMasks,
-                                                      color: FlutterFlowTheme.of(context).cor1,
+                                                      color: FlutterFlowTheme.of(context).primaryColor,
                                                       size: 55,
                                                     ),
                                                     Column(

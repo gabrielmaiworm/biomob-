@@ -73,7 +73,7 @@ bool validaSenha(
   String password,
   String passwordTwo,
 ) {
-  if (password == passwordTwo && password.length > 6) {
+  if (password == passwordTwo && password.length >= 6) {
     return true;
   } else {
     return false;

@@ -454,16 +454,17 @@ class _TutorialLocaisWidgetState extends State<TutorialLocaisWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'A sua avaliação é muito importante',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: Color(0xFF14181B),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                    Expanded(
+                                      child: Text(
+                                        'A sua avaliação é muito importante',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                                              fontFamily: 'Poppins',
+                                              color: Color(0xFF14181B),
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
                                     ),
                                   ],
                                 ),

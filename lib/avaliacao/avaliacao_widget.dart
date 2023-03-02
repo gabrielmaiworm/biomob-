@@ -1,7 +1,7 @@
-import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
+import '../flutter_flow/flutter_flow_model.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -12,6 +12,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+
+import 'avaliacao_model.dart';
+export 'avaliacao_model.dart';
 
 class AvaliacaoWidget extends StatefulWidget {
   const AvaliacaoWidget({
@@ -26,28 +29,25 @@ class AvaliacaoWidget extends StatefulWidget {
 }
 
 class _AvaliacaoWidgetState extends State<AvaliacaoWidget> {
-  String? audioVisualValue;
-  String? banheiroValue;
-  String? entradaPrincipalValue;
-  String? circulacaoInternaValue;
-  String? estacionamentoValue;
-  String? calcadaValue;
-  double? ratingBarValue;
-  TextEditingController? textController;
-  final _unfocusNode = FocusNode();
+  late AvaliacaoModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController();
+    _model = createModel(context, () => AvaliacaoModel());
+
+    _model.textController ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    textController?.dispose();
     super.dispose();
   }
 
@@ -121,682 +121,209 @@ class _AvaliacaoWidgetState extends State<AvaliacaoWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Stack(
+                              children: [
+                                if (Theme.of(context).brightness ==
+                                    Brightness.dark)
+                                  Lottie.network(
+                                    'https://lottie.host/14aad2bd-0e5d-4461-9612-4b999650f492/n3p9uQGJrI.json',
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 45,
+                                    fit: BoxFit.cover,
+                                    animate: true,
+                                  ),
+                                if (Theme.of(context).brightness ==
+                                    Brightness.light)
+                                  Lottie.network(
+                                    'https://lottie.host/c92c8431-5c77-49a7-81a9-ac7aa9291797/9DsVyaJTHl.json',
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 45,
+                                    fit: BoxFit.cover,
+                                    animate: true,
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Row(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                              child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Stack(
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      if (Theme.of(context).brightness ==
-                                          Brightness.dark)
-                                        Lottie.network(
-                                          'https://lottie.host/14aad2bd-0e5d-4461-9612-4b999650f492/n3p9uQGJrI.json',
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 45,
-                                          fit: BoxFit.cover,
-                                          animate: true,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 5, 0, 0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 0, 24, 0),
+                                              child: Text(
+                                                'Entrada Principal',
+                                                textAlign: TextAlign.start,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .textoBotao,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 0, 0, 0),
+                                              child: Text(
+                                                'Possui entrada facilitada?',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .textoBotao,
+                                                      fontSize: 12,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      if (Theme.of(context).brightness ==
-                                          Brightness.light)
-                                        Lottie.network(
-                                          'https://lottie.host/c92c8431-5c77-49a7-81a9-ac7aa9291797/9DsVyaJTHl.json',
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 45,
-                                          fit: BoxFit.cover,
-                                          animate: true,
-                                        ),
+                                      ),
                                     ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 0, 12, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: [
+                                              ChipData('Sim', Icons.check),
+                                              ChipData('Não', Icons.close),
+                                              ChipData('Não se aplica',
+                                                  Icons.not_interested_rounded)
+                                            ],
+                                            onChanged: (val) => setState(() =>
+                                                _model.entradaPrincipalValue =
+                                                    val?.first),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .cor1,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                              iconColor: Colors.white,
+                                              iconSize: 16,
+                                              elevation: 4,
+                                            ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  Color(0x46AEAEAE),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF323B45),
+                                                  ),
+                                              iconColor: Color(0xFF323B45),
+                                              iconSize: 18,
+                                              elevation: 4,
+                                            ),
+                                            chipSpacing: 10,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.center,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 15, 16, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.12,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .fillBotaoMenu,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 12,
-                                        color: Color(0x34111417),
-                                        offset: Offset(0, 1),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 5, 0, 0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 24, 0),
-                                                  child: Text(
-                                                    'Entrada Principal',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 0, 0),
-                                                  child: Text(
-                                                    'Possui entrada facilitada?',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 12,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 0, 12, 10),
-                                        child: Row(
+                                            0, 5, 0, 0),
+                                        child: Column(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            FlutterFlowChoiceChips(
-                                              options: [
-                                                ChipData('Sim', Icons.check),
-                                                ChipData('Não', Icons.close),
-                                                ChipData(
-                                                    'Não se aplica',
-                                                    Icons
-                                                        .not_interested_rounded)
-                                              ],
-                                              onChanged: (val) => setState(() =>
-                                                  entradaPrincipalValue =
-                                                      val?.first),
-                                              selectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .cor1,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                iconColor: Colors.white,
-                                                iconSize: 16,
-                                                elevation: 4,
-                                              ),
-                                              unselectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    Color(0x46AEAEAE),
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF323B45),
-                                                    ),
-                                                iconColor: Color(0xFF323B45),
-                                                iconSize: 18,
-                                                elevation: 4,
-                                              ),
-                                              chipSpacing: 20,
-                                              multiselect: false,
-                                              alignment: WrapAlignment.start,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 15, 16, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.12,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .fillBotaoMenu,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 12,
-                                        color: Color(0x34111417),
-                                        offset: Offset(0, 1),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 5, 0, 0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 24, 0),
-                                                  child: Text(
-                                                    'Banheiro Acessível',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 0, 0),
-                                                  child: Text(
-                                                    'Possui banheiro acessível para pessoas deficientes?',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 12,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 0, 12, 10),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            FlutterFlowChoiceChips(
-                                              options: [
-                                                ChipData('Sim', Icons.check),
-                                                ChipData('Não', Icons.close),
-                                                ChipData(
-                                                    'Não se aplica',
-                                                    Icons
-                                                        .not_interested_rounded)
-                                              ],
-                                              onChanged: (val) => setState(() =>
-                                                  banheiroValue = val?.first),
-                                              selectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .cor1,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                iconColor: Colors.white,
-                                                iconSize: 16,
-                                                elevation: 4,
-                                              ),
-                                              unselectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    Color(0x46AEAEAE),
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF323B45),
-                                                    ),
-                                                iconColor: Color(0xFF323B45),
-                                                iconSize: 18,
-                                                elevation: 4,
-                                              ),
-                                              chipSpacing: 20,
-                                              multiselect: false,
-                                              alignment: WrapAlignment.start,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 15, 16, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.12,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .fillBotaoMenu,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 12,
-                                        color: Color(0x34111417),
-                                        offset: Offset(0, 1),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 5, 0, 0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 24, 0),
-                                                  child: Text(
-                                                    'Circulação Interna',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 0, 0),
-                                                  child: Text(
-                                                    'O usuário possui autonomia para circular?',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 12,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 0, 12, 10),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            FlutterFlowChoiceChips(
-                                              options: [
-                                                ChipData('Sim', Icons.check),
-                                                ChipData('Não', Icons.close),
-                                                ChipData(
-                                                    'Não se aplica',
-                                                    Icons
-                                                        .not_interested_rounded)
-                                              ],
-                                              onChanged: (val) => setState(() =>
-                                                  circulacaoInternaValue =
-                                                      val?.first),
-                                              selectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .cor1,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                iconColor: Colors.white,
-                                                iconSize: 16,
-                                                elevation: 4,
-                                              ),
-                                              unselectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    Color(0x46AEAEAE),
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF323B45),
-                                                    ),
-                                                iconColor: Color(0xFF323B45),
-                                                iconSize: 18,
-                                                elevation: 4,
-                                              ),
-                                              chipSpacing: 20,
-                                              multiselect: false,
-                                              alignment: WrapAlignment.start,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 15, 16, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.14,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .fillBotaoMenu,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 12,
-                                        color: Color(0x34111417),
-                                        offset: Offset(0, 1),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            child: Padding(
+                                            Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 5, 0, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12, 0, 24, 0),
-                                                    child: Text(
-                                                      'Estacionamento',
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .textoBotao,
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12, 0, 0, 0),
-                                                    child: Text(
-                                                      'Esse local possui vagas reservadas para pessoas com deficiência ou serviço de manobrista?',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .textoBotao,
-                                                                fontSize: 12,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 0, 12, 10),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            FlutterFlowChoiceChips(
-                                              options: [
-                                                ChipData('Sim', Icons.check),
-                                                ChipData('Não', Icons.close),
-                                                ChipData(
-                                                    'Não se aplica',
-                                                    Icons
-                                                        .not_interested_rounded)
-                                              ],
-                                              onChanged: (val) => setState(() =>
-                                                  estacionamentoValue =
-                                                      val?.first),
-                                              selectedChipStyle: ChipStyle(
-                                                backgroundColor:
+                                                  .fromSTEB(12, 0, 24, 0),
+                                              child: Text(
+                                                'Banheiro Acessível',
+                                                textAlign: TextAlign.start,
+                                                style:
                                                     FlutterFlowTheme.of(context)
-                                                        .cor1,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                iconColor: Colors.white,
-                                                iconSize: 16,
-                                                elevation: 4,
-                                              ),
-                                              unselectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    Color(0x46AEAEAE),
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF323B45),
-                                                    ),
-                                                iconColor: Color(0xFF323B45),
-                                                iconSize: 18,
-                                                elevation: 4,
-                                              ),
-                                              chipSpacing: 20,
-                                              multiselect: false,
-                                              alignment: WrapAlignment.start,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 15, 16, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.12,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .fillBotaoMenu,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 12,
-                                        color: Color(0x34111417),
-                                        offset: Offset(0, 1),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 5, 0, 0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 24, 0),
-                                                  child: Text(
-                                                    'Calçada',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
                                                         .bodyText2
                                                         .override(
                                                           fontFamily: 'Poppins',
@@ -807,600 +334,993 @@ class _AvaliacaoWidgetState extends State<AvaliacaoWidget> {
                                                           fontWeight:
                                                               FontWeight.bold,
                                                         ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 0, 0, 0),
-                                                  child: Text(
-                                                    'Possui calçada para fácil acesso?',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 12,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 0, 12, 10),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            FlutterFlowChoiceChips(
-                                              options: [
-                                                ChipData('Sim', Icons.check),
-                                                ChipData('Não', Icons.close),
-                                                ChipData(
-                                                    'Não se aplica',
-                                                    Icons
-                                                        .not_interested_rounded)
-                                              ],
-                                              onChanged: (val) => setState(() =>
-                                                  calcadaValue = val?.first),
-                                              selectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .cor1,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                iconColor: Colors.white,
-                                                iconSize: 16,
-                                                elevation: 4,
                                               ),
-                                              unselectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    Color(0x46AEAEAE),
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF323B45),
-                                                    ),
-                                                iconColor: Color(0xFF323B45),
-                                                iconSize: 18,
-                                                elevation: 4,
-                                              ),
-                                              chipSpacing: 20,
-                                              multiselect: false,
-                                              alignment: WrapAlignment.start,
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 15, 16, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.14,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .fillBotaoMenu,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 12,
-                                        color: Color(0x34111417),
-                                        offset: Offset(0, 1),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            child: Padding(
+                                            Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 5, 0, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12, 0, 24, 0),
-                                                    child: Text(
-                                                      'Áudio/Visual',
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .textoBotao,
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12, 0, 0, 0),
-                                                    child: Text(
-                                                      'Possui recursos para surdos ou cegos? ( Piso tátil, Cardápio em braile, interprete de Libras, ETC)',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .textoBotao,
-                                                                fontSize: 12,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 0, 12, 10),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            FlutterFlowChoiceChips(
-                                              options: [
-                                                ChipData('Sim', Icons.check),
-                                                ChipData('Não', Icons.close),
-                                                ChipData(
-                                                    'Não se aplica',
-                                                    Icons
-                                                        .not_interested_rounded)
-                                              ],
-                                              onChanged: (val) => setState(() =>
-                                                  audioVisualValue =
-                                                      val?.first),
-                                              selectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .cor1,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                iconColor: Colors.white,
-                                                iconSize: 16,
-                                                elevation: 4,
-                                              ),
-                                              unselectedChipStyle: ChipStyle(
-                                                backgroundColor:
-                                                    Color(0x46AEAEAE),
-                                                textStyle: FlutterFlowTheme.of(
+                                                  .fromSTEB(12, 0, 0, 0),
+                                              child: Text(
+                                                'Possui banheiro acessível para pessoas deficientes?',
+                                                style: FlutterFlowTheme.of(
                                                         context)
-                                                    .bodyText2
+                                                    .bodyText1
                                                     .override(
                                                       fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF323B45),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .textoBotao,
+                                                      fontSize: 12,
                                                     ),
-                                                iconColor: Color(0xFF323B45),
-                                                iconSize: 18,
-                                                elevation: 4,
                                               ),
-                                              chipSpacing: 20,
-                                              multiselect: false,
-                                              alignment: WrapAlignment.start,
                                             ),
                                           ],
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 25, 0, 10),
-                                child: Text(
-                                  'Dê sua nota',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: FlutterFlowTheme.of(context)
-                                            .textoBotao,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                              ),
-                              RatingBar.builder(
-                                onRatingUpdate: (newValue) {
-                                  setState(() => ratingBarValue = newValue);
-                                  if (entradaPrincipalValue == 'Sim') {
-                                    FFAppState().update(() {
-                                      FFAppState().entradaPrincipal = 5.0;
-                                    });
-                                  } else {
-                                    FFAppState().update(() {
-                                      FFAppState().entradaPrincipal = 1.0;
-                                    });
-                                  }
-
-                                  if (banheiroValue == 'Sim') {
-                                    FFAppState().update(() {
-                                      FFAppState().banheiro = 5.0;
-                                    });
-                                  } else {
-                                    FFAppState().update(() {
-                                      FFAppState().banheiro = 1.0;
-                                    });
-                                  }
-
-                                  if (circulacaoInternaValue == 'Sim') {
-                                    FFAppState().update(() {
-                                      FFAppState().circulacaoInterna = 5.0;
-                                    });
-                                  } else {
-                                    FFAppState().update(() {
-                                      FFAppState().circulacaoInterna = 1.0;
-                                    });
-                                  }
-
-                                  if (estacionamentoValue == 'Sim') {
-                                    FFAppState().update(() {
-                                      FFAppState().estacionamento = 5.0;
-                                    });
-                                  } else {
-                                    FFAppState().update(() {
-                                      FFAppState().estacionamento = 1.0;
-                                    });
-                                  }
-
-                                  if (calcadaValue == 'Sim') {
-                                    FFAppState().update(() {
-                                      FFAppState().calcada = 5.0;
-                                    });
-                                  } else {
-                                    FFAppState().update(() {
-                                      FFAppState().calcada = 1.0;
-                                    });
-                                  }
-
-                                  if (audioVisualValue == 'Sim') {
-                                    FFAppState().update(() {
-                                      FFAppState().audioVisual = 5.0;
-                                    });
-                                  } else {
-                                    FFAppState().update(() {
-                                      FFAppState().audioVisual = 1.0;
-                                    });
-                                  }
-                                },
-                                itemBuilder: (context, index) => Icon(
-                                  Icons.star_rounded,
-                                  color: Color(0xFFF7AF0C),
-                                ),
-                                direction: Axis.horizontal,
-                                initialRating: ratingBarValue ??= 0,
-                                unratedColor: Color(0xFF9E9E9E),
-                                itemCount: 5,
-                                itemSize: 55,
-                                glowColor: Color(0xFFF7AF0C),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 25, 10, 5),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'Comente sua nota',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: FlutterFlowTheme.of(context)
-                                                .textoBotao,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 0, 16, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.15,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).cor4,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        color: Color(0x34111417),
-                                        offset: Offset(0, 2),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: FlutterFlowTheme.of(context).cor3,
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: Padding(
+                                  Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 5, 10, 10),
-                                    child: TextFormField(
-                                      controller: textController,
-                                      onChanged: (_) => EasyDebounce.debounce(
-                                        'textController',
-                                        Duration(milliseconds: 2000),
-                                        () => setState(() {}),
-                                      ),
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        hintText: 'Escreva sua opnião..',
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
+                                        12, 0, 12, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: [
+                                              ChipData('Sim', Icons.check),
+                                              ChipData('Não', Icons.close),
+                                              ChipData('Não se aplica',
+                                                  Icons.not_interested_rounded)
+                                            ],
+                                            onChanged: (val) => setState(() =>
+                                                _model.banheiroValue =
+                                                    val?.first),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .cor1,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                              iconColor: Colors.white,
+                                              iconSize: 16,
+                                              elevation: 4,
+                                            ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  Color(0x46AEAEAE),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF323B45),
+                                                  ),
+                                              iconColor: Color(0xFF323B45),
+                                              iconSize: 18,
+                                              elevation: 4,
+                                            ),
+                                            chipSpacing: 10,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.center,
                                           ),
                                         ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                        errorBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                        focusedErrorBorder:
-                                            UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: FlutterFlowTheme.of(context)
-                                                .textoBotao,
-                                          ),
+                                      ],
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    if (entradaPrincipalValue ==
-                                        'Não se aplica') {
-                                      FFAppState().update(() {
-                                        FFAppState().entradaPrincipalNA = true;
-                                        FFAppState().entradaPrincipal = 0.0;
-                                      });
-                                    } else {
-                                      FFAppState().update(() {
-                                        FFAppState().entradaPrincipalNA = false;
-                                      });
-                                    }
-
-                                    if (circulacaoInternaValue ==
-                                        'Não se aplica') {
-                                      FFAppState().update(() {
-                                        FFAppState().circulacaoInternaNA = true;
-                                        FFAppState().circulacaoInterna = 0.0;
-                                      });
-                                    } else {
-                                      FFAppState().update(() {
-                                        FFAppState().circulacaoInternaNA =
-                                            false;
-                                      });
-                                    }
-
-                                    if (banheiroValue == 'Não se aplica') {
-                                      FFAppState().update(() {
-                                        FFAppState().banheiroAcessivelNA = true;
-                                        FFAppState().banheiro = 0.0;
-                                      });
-                                    } else {
-                                      FFAppState().update(() {
-                                        FFAppState().banheiroAcessivelNA =
-                                            false;
-                                      });
-                                    }
-
-                                    if (estacionamentoValue ==
-                                        'Não se aplica') {
-                                      FFAppState().update(() {
-                                        FFAppState().estacionamentoNA = true;
-                                        FFAppState().estacionamento = 0.0;
-                                      });
-                                    } else {
-                                      FFAppState().update(() {
-                                        FFAppState().estacionamentoNA = false;
-                                      });
-                                    }
-
-                                    if (calcadaValue == 'Não se aplica') {
-                                      FFAppState().update(() {
-                                        FFAppState().calcadaNA = true;
-                                        FFAppState().calcada = 0.0;
-                                      });
-                                    } else {
-                                      FFAppState().update(() {
-                                        FFAppState().calcadaNA = false;
-                                      });
-                                    }
-
-                                    if (audioVisualValue == 'Não se aplica') {
-                                      FFAppState().update(() {
-                                        FFAppState().audioVisualNA = true;
-                                        FFAppState().audioVisual = 0.0;
-                                      });
-                                    } else {
-                                      FFAppState().update(() {
-                                        FFAppState().audioVisualNA = false;
-                                      });
-                                    }
-
-                                    await POSTavaliacaoCall.call(
-                                      placeId: getJsonField(
-                                        widget.informacoes,
-                                        r'''$..place_id''',
-                                      ).toString(),
-                                      placeName: getJsonField(
-                                        widget.informacoes,
-                                        r'''$..name''',
-                                      ).toString(),
-                                      userId: currentUserEmail,
-                                      userName: currentUserDisplayName,
-                                      star: ratingBarValue,
-                                      comentario: textController!.text,
-                                      userImage: currentUserPhoto,
-                                      data: dateTimeFormat(
-                                        'd/M/y',
-                                        getCurrentTimestamp,
-                                        locale: FFLocalizations.of(context)
-                                            .languageCode,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 5, 0, 0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 0, 24, 0),
+                                              child: Text(
+                                                'Circulação Interna',
+                                                textAlign: TextAlign.start,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .textoBotao,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 0, 0, 0),
+                                              child: Text(
+                                                'O usuário possui autonomia para circular?',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .textoBotao,
+                                                      fontSize: 12,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      circulacaoInterna:
-                                          FFAppState().circulacaoInterna,
-                                      estacionamento:
-                                          FFAppState().estacionamento,
-                                      calcada: FFAppState().calcada,
-                                      audioVisual: FFAppState().audioVisual,
-                                      banheiroAcessivel: FFAppState().banheiro,
-                                      entradaPrincipal:
-                                          FFAppState().entradaPrincipal,
-                                      circulacaoInternaNA:
-                                          FFAppState().circulacaoInternaNA,
-                                      estacionamentoNA:
-                                          FFAppState().estacionamentoNA,
-                                      calcadaNA: FFAppState().calcadaNA,
-                                      audioVisualNA: FFAppState().audioVisualNA,
-                                      entradaPrincipalNA:
-                                          FFAppState().entradaPrincipalNA,
-                                      banheiroAcessivelNA:
-                                          FFAppState().banheiroAcessivelNA,
-                                    );
-                                    context.pop();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Avaliação feita com sucesso.',
-                                          style: TextStyle(
-                                            color: Colors.white,
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 0, 12, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: [
+                                              ChipData('Sim', Icons.check),
+                                              ChipData('Não', Icons.close),
+                                              ChipData('Não se aplica',
+                                                  Icons.not_interested_rounded)
+                                            ],
+                                            onChanged: (val) => setState(() =>
+                                                _model.circulacaoInternaValue =
+                                                    val?.first),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .cor1,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                              iconColor: Colors.white,
+                                              iconSize: 16,
+                                              elevation: 4,
+                                            ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  Color(0x46AEAEAE),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF323B45),
+                                                  ),
+                                              iconColor: Color(0xFF323B45),
+                                              iconSize: 18,
+                                              elevation: 4,
+                                            ),
+                                            chipSpacing: 10,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.center,
                                           ),
                                         ),
-                                        duration: Duration(milliseconds: 4000),
-                                        backgroundColor: Color(0xFF52B65F),
-                                      ),
-                                    );
-                                  },
-                                  text: 'Confirmar',
-                                  options: FFButtonOptions(
-                                    width: 180,
-                                    height: 40,
-                                    color: FlutterFlowTheme.of(context).cor5,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
+                                      ],
                                     ),
-                                    borderRadius: BorderRadius.circular(12),
                                   ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 5, 0, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(12, 0, 24, 0),
+                                                child: Text(
+                                                  'Estacionamento',
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textoBotao,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(12, 0, 0, 0),
+                                                child: Text(
+                                                  'Esse local possui vagas reservadas para pessoas com deficiência ou serviço de manobrista?',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textoBotao,
+                                                        fontSize: 12,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 0, 12, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: [
+                                              ChipData('Sim', Icons.check),
+                                              ChipData('Não', Icons.close),
+                                              ChipData('Não se aplica',
+                                                  Icons.not_interested_rounded)
+                                            ],
+                                            onChanged: (val) => setState(() =>
+                                                _model.estacionamentoValue =
+                                                    val?.first),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .cor1,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                              iconColor: Colors.white,
+                                              iconSize: 16,
+                                              elevation: 4,
+                                            ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  Color(0x46AEAEAE),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF323B45),
+                                                  ),
+                                              iconColor: Color(0xFF323B45),
+                                              iconSize: 18,
+                                              elevation: 4,
+                                            ),
+                                            chipSpacing: 10,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.center,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 5, 0, 0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 0, 24, 0),
+                                              child: Text(
+                                                'Calçada',
+                                                textAlign: TextAlign.start,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .textoBotao,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 0, 0, 0),
+                                              child: Text(
+                                                'Possui calçada para fácil acesso?',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .textoBotao,
+                                                      fontSize: 12,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 0, 12, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: [
+                                              ChipData('Sim', Icons.check),
+                                              ChipData('Não', Icons.close),
+                                              ChipData('Não se aplica',
+                                                  Icons.not_interested_rounded)
+                                            ],
+                                            onChanged: (val) => setState(() =>
+                                                _model.calcadaValue =
+                                                    val?.first),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .cor1,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                              iconColor: Colors.white,
+                                              iconSize: 16,
+                                              elevation: 4,
+                                            ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  Color(0x46AEAEAE),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF323B45),
+                                                  ),
+                                              iconColor: Color(0xFF323B45),
+                                              iconSize: 18,
+                                              elevation: 4,
+                                            ),
+                                            chipSpacing: 10,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.center,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context).fillBotaoMenu,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 5, 0, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(12, 0, 24, 0),
+                                                child: Text(
+                                                  'Áudio/Visual',
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textoBotao,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(12, 0, 0, 0),
+                                                child: Text(
+                                                  'Possui recursos para surdos ou cegos? ( Piso tátil, Cardápio em braile, interprete de Libras, ETC)',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textoBotao,
+                                                        fontSize: 12,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 0, 12, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: [
+                                              ChipData('Sim', Icons.check),
+                                              ChipData('Não', Icons.close),
+                                              ChipData('Não se aplica',
+                                                  Icons.not_interested_rounded)
+                                            ],
+                                            onChanged: (val) => setState(() =>
+                                                _model.audioVisualValue =
+                                                    val?.first),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .cor1,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                              iconColor: Colors.white,
+                                              iconSize: 16,
+                                              elevation: 4,
+                                            ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  Color(0x46AEAEAE),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF323B45),
+                                                  ),
+                                              iconColor: Color(0xFF323B45),
+                                              iconSize: 18,
+                                              elevation: 4,
+                                            ),
+                                            chipSpacing: 10,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.center,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 10),
+                          child: Text(
+                            'Dê sua nota',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color:
+                                      FlutterFlowTheme.of(context).textoBotao,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
                                 ),
+                          ),
+                        ),
+                        RatingBar.builder(
+                          onRatingUpdate: (newValue) {
+                            setState(() => _model.ratingBarValue = newValue);
+                            if (_model.entradaPrincipalValue == 'Sim') {
+                              FFAppState().update(() {
+                                FFAppState().entradaPrincipal = 5.0;
+                              });
+                            } else {
+                              FFAppState().update(() {
+                                FFAppState().entradaPrincipal = 1.0;
+                              });
+                            }
+
+                            if (_model.banheiroValue == 'Sim') {
+                              FFAppState().update(() {
+                                FFAppState().banheiro = 5.0;
+                              });
+                            } else {
+                              FFAppState().update(() {
+                                FFAppState().banheiro = 1.0;
+                              });
+                            }
+
+                            if (_model.circulacaoInternaValue == 'Sim') {
+                              FFAppState().update(() {
+                                FFAppState().circulacaoInterna = 5.0;
+                              });
+                            } else {
+                              FFAppState().update(() {
+                                FFAppState().circulacaoInterna = 1.0;
+                              });
+                            }
+
+                            if (_model.estacionamentoValue == 'Sim') {
+                              FFAppState().update(() {
+                                FFAppState().estacionamento = 5.0;
+                              });
+                            } else {
+                              FFAppState().update(() {
+                                FFAppState().estacionamento = 1.0;
+                              });
+                            }
+
+                            if (_model.calcadaValue == 'Sim') {
+                              FFAppState().update(() {
+                                FFAppState().calcada = 5.0;
+                              });
+                            } else {
+                              FFAppState().update(() {
+                                FFAppState().calcada = 1.0;
+                              });
+                            }
+
+                            if (_model.audioVisualValue == 'Sim') {
+                              FFAppState().update(() {
+                                FFAppState().audioVisual = 5.0;
+                              });
+                            } else {
+                              FFAppState().update(() {
+                                FFAppState().audioVisual = 1.0;
+                              });
+                            }
+                          },
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star_rounded,
+                            color: Color(0xFFF7AF0C),
+                          ),
+                          direction: Axis.horizontal,
+                          initialRating: _model.ratingBarValue ??= 0,
+                          unratedColor: Color(0xFF9E9E9E),
+                          itemCount: 5,
+                          itemSize: 55,
+                          glowColor: Color(0xFFF7AF0C),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(16, 25, 10, 5),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Comente sua nota',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .textoBotao,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                               ),
                             ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                          child: Container(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).cor4,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  color: Color(0x34111417),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).cor3,
+                                width: 1,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(10, 5, 10, 10),
+                              child: TextFormField(
+                                controller: _model.textController,
+                                onChanged: (_) => EasyDebounce.debounce(
+                                  '_model.textController',
+                                  Duration(milliseconds: 2000),
+                                  () => setState(() {}),
+                                ),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  hintText: 'Escreva sua opnião..',
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedErrorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: FlutterFlowTheme.of(context)
+                                          .textoBotao,
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 30),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              if (_model.entradaPrincipalValue ==
+                                  'Não se aplica') {
+                                FFAppState().update(() {
+                                  FFAppState().entradaPrincipalNA = true;
+                                  FFAppState().entradaPrincipal = 0.0;
+                                });
+                              } else {
+                                FFAppState().update(() {
+                                  FFAppState().entradaPrincipalNA = false;
+                                });
+                              }
+
+                              if (_model.circulacaoInternaValue ==
+                                  'Não se aplica') {
+                                FFAppState().update(() {
+                                  FFAppState().circulacaoInternaNA = true;
+                                  FFAppState().circulacaoInterna = 0.0;
+                                });
+                              } else {
+                                FFAppState().update(() {
+                                  FFAppState().circulacaoInternaNA = false;
+                                });
+                              }
+
+                              if (_model.banheiroValue == 'Não se aplica') {
+                                FFAppState().update(() {
+                                  FFAppState().banheiroAcessivelNA = true;
+                                  FFAppState().banheiro = 0.0;
+                                });
+                              } else {
+                                FFAppState().update(() {
+                                  FFAppState().banheiroAcessivelNA = false;
+                                });
+                              }
+
+                              if (_model.estacionamentoValue ==
+                                  'Não se aplica') {
+                                FFAppState().update(() {
+                                  FFAppState().estacionamentoNA = true;
+                                  FFAppState().estacionamento = 0.0;
+                                });
+                              } else {
+                                FFAppState().update(() {
+                                  FFAppState().estacionamentoNA = false;
+                                });
+                              }
+
+                              if (_model.calcadaValue == 'Não se aplica') {
+                                FFAppState().update(() {
+                                  FFAppState().calcadaNA = true;
+                                  FFAppState().calcada = 0.0;
+                                });
+                              } else {
+                                FFAppState().update(() {
+                                  FFAppState().calcadaNA = false;
+                                });
+                              }
+
+                              if (_model.audioVisualValue == 'Não se aplica') {
+                                FFAppState().update(() {
+                                  FFAppState().audioVisualNA = true;
+                                  FFAppState().audioVisual = 0.0;
+                                });
+                              } else {
+                                FFAppState().update(() {
+                                  FFAppState().audioVisualNA = false;
+                                });
+                              }
+
+                              await POSTavaliacaoCall.call(
+                                placeId: getJsonField(
+                                  widget.informacoes,
+                                  r'''$..place_id''',
+                                ).toString(),
+                                placeName: getJsonField(
+                                  widget.informacoes,
+                                  r'''$..name''',
+                                ).toString(),
+                                userId: FFAppState().emailPersist,
+                                userName: FFAppState().nomePersist,
+                                star: _model.ratingBarValue,
+                                comentario: _model.textController!.text,
+                                userImage: FFAppState().fotoPersist,
+                                data: dateTimeFormat(
+                                  'd/M/y',
+                                  getCurrentTimestamp,
+                                  locale:
+                                      FFLocalizations.of(context).languageCode,
+                                ),
+                                circulacaoInterna:
+                                    FFAppState().circulacaoInterna,
+                                estacionamento: FFAppState().estacionamento,
+                                calcada: FFAppState().calcada,
+                                audioVisual: FFAppState().audioVisual,
+                                banheiroAcessivel: FFAppState().banheiro,
+                                entradaPrincipal: FFAppState().entradaPrincipal,
+                                circulacaoInternaNA:
+                                    FFAppState().circulacaoInternaNA,
+                                estacionamentoNA: FFAppState().estacionamentoNA,
+                                calcadaNA: FFAppState().calcadaNA,
+                                audioVisualNA: FFAppState().audioVisualNA,
+                                entradaPrincipalNA:
+                                    FFAppState().entradaPrincipalNA,
+                                banheiroAcessivelNA:
+                                    FFAppState().banheiroAcessivelNA,
+                              );
+
+                              context.pushNamed('LocaisAcessiveis');
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Avaliação feita com sucesso.',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: Color(0xFF52B65F),
+                                ),
+                              );
+                            },
+                            text: 'Confirmar',
+                            options: FFButtonOptions(
+                              width: 180,
+                              height: 40,
+                              color: FlutterFlowTheme.of(context).cor5,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                         ),
                       ],

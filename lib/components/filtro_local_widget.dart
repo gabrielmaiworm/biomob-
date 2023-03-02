@@ -234,7 +234,7 @@ class _FiltroLocalWidgetState extends State<FiltroLocalWidget> {
                   onPressed: () async {
                     FFAppState().update(() {
                       FFAppState().distancia = '5';
-                      FFAppState().avaliacaoNota = 0.0;
+                      FFAppState().avaliacaoNota = 5;
                     });
                     Navigator.pop(context);
                   },

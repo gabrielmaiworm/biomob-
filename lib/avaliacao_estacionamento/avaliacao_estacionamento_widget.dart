@@ -396,17 +396,16 @@ class _AvaliacaoEstacionamentoWidgetState
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  'Quer deixar um comentário?',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: FlutterFlowTheme.of(context)
-                                            .textoBotao,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                Expanded(
+                                  child: Text(
+                                    'Quer deixar um comentário?',
+                                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                                          fontFamily: 'Poppins',
+                                          color: FlutterFlowTheme.of(context).textoBotao,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),

@@ -213,42 +213,41 @@ class _BottomEmpregoWidgetState extends State<BottomEmpregoWidget> {
                 ),
               ),
               if (getJsonField(
-                    widget.estabelecimentoPlace,
-                    r'''$..link''',
-                  ) !=
-                  null)
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                  child: InkWell(
-                    onTap: () async {
-                      await launchURL(getJsonField(
-                        widget.estabelecimentoPlace,
-                        r'''$..link''',
-                      ).toString());
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                          child: Icon(
-                            Icons.link_rounded,
-                            color: Color(0xFF2EBD9B),
-                            size: 24,
-                          ),
+                  widget.estabelecimentoPlace,
+                  r'''$..link''',
+                ) !=
+                null)
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                child: InkWell(
+                  onTap: () async {
+                    await launchURL(getJsonField(
+                      widget.estabelecimentoPlace,
+                      r'''$..link''',
+                    ).toString());
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                        child: Icon(
+                          Icons.link_rounded,
+                          color: Color(0xFF2EBD9B),
+                          size: 24,
                         ),
-                        Text(
-                          'Acessar vaga',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF4A4A4A),
-                                  ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        'Acessar vaga',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Lexend Deca',
+                              color: Color(0xFF4A4A4A),
+                            ),
+                      ),
+                    ],
                   ),
                 ),
+              ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
                 child: Row(

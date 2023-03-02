@@ -176,155 +176,158 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                                       (context, listaComentariosIndex) {
                                     final listaComentariosItem =
                                         listaComentarios[listaComentariosIndex];
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 10, 10, 10),
-                                      child: Card(
-                                        clipBehavior:
-                                            Clip.antiAliasWithSaveLayer,
-                                        color: FlutterFlowTheme.of(context)
-                                            .fillBotaoMenu,
-                                        elevation: 30,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(10, 10, 10, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 20, 0),
-                                                    child: Container(
-                                                      width: 55,
-                                                      height: 55,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Image.network(
-                                                        getJsonField(
-                                                          listaComentariosItem,
-                                                          r'''$..user_image''',
+                                    return Visibility(
+                                    visible: getJsonField(
+                                          listaComentariosItem,
+                                          r'''$..comentario''',
+                                        ) !=
+                                        "",
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10, 10, 10, 10),
+                                        child: Card(
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          color: FlutterFlowTheme.of(context)
+                                              .fillBotaoMenu,
+                                          elevation: 30,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(10, 10, 10, 5),
+                                                child: Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                                                      child: Container(
+                                                        width: 55,
+                                                        height: 55,
+                                                        clipBehavior: Clip.antiAlias,
+                                                        decoration: BoxDecoration(
+                                                          shape: BoxShape.circle,
+                                                        ),
+                                                        child: Image.network(
+                                                          valueOrDefault<String>(
+                                                            getJsonField(
+                                                              listaComentariosItem,
+                                                              r'''$..user_image''',
+                                                            ),
+                                                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    getJsonField(
-                                                      listaComentariosItem,
-                                                      r'''$..userName''',
-                                                    )
-                                                        .toString()
-                                                        .maybeHandleOverflow(
+                                                    Expanded(
+                                                      child: Text(
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            listaComentariosItem,
+                                                            r'''$..userName''',
+                                                          ).toString(),
+                                                          'Anônimo',
+                                                        ).maybeHandleOverflow(
                                                           maxChars: 30,
                                                           replacement: '…',
                                                         ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                          fontSize: 17,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(10, 0, 10, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  RatingBarIndicator(
-                                                    itemBuilder:
-                                                        (context, index) =>
-                                                            Icon(
-                                                      Icons.star_rounded,
-                                                      color: Color(0xFFF7AF0C),
+                                                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                              fontFamily: 'Lexend Deca',
+                                                              color: FlutterFlowTheme.of(context).textoBotao,
+                                                              fontSize: 17,
+                                                            ),
+                                                      ),
                                                     ),
-                                                    direction: Axis.horizontal,
-                                                    rating: getJsonField(
-                                                      listaComentariosItem,
-                                                      r'''$..star''',
-                                                    ),
-                                                    unratedColor:
-                                                        Color(0xFF9E9E9E),
-                                                    itemCount: 5,
-                                                    itemSize: 25,
-                                                  ),
-                                                  Text(
-                                                    getJsonField(
-                                                      listaComentariosItem,
-                                                      r'''$..data''',
-                                                    ).toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .textoBotao,
-                                                        ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10, 10, 10, 10),
-                                                    child: AutoSizeText(
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(10, 0, 10, 0),
+                                                child: Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    RatingBarIndicator(
+                                                      itemBuilder:
+                                                          (context, index) =>
+                                                              Icon(
+                                                        Icons.star_rounded,
+                                                        color: Color(0xFFF7AF0C),
+                                                      ),
+                                                      direction: Axis.horizontal,
+                                                      rating: getJsonField(
+                                                        listaComentariosItem,
+                                                        r'''$..star''',
+                                                      ),
+                                                      unratedColor:
+                                                          Color(0xFF9E9E9E),
+                                                      itemCount: 5,
+                                                      itemSize: 25,
+                                                    ),
+                                                    Text(
                                                       getJsonField(
                                                         listaComentariosItem,
-                                                        r'''$..comentario''',
+                                                        r'''$..data''',
                                                       ).toString(),
-                                                      maxLines: 25,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .textoBotao,
-                                                              ),
+                                                      style: FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Lexend Deca',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .textoBotao,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10, 10, 10, 10),
+                                                      child: AutoSizeText(
+                                                        getJsonField(
+                                                          listaComentariosItem,
+                                                          r'''$..comentario''',
+                                                        ).toString(),
+                                                        maxLines: 25,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Lexend Deca',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .textoBotao,
+                                                                ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
+                                      )
                                     );
                                   },
                                 ),

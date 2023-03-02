@@ -578,6 +578,10 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                       FFAppState().nome = nomeController!.text;
                                       FFAppState().email =
                                           emailController!.text;
+                                          FFAppState().emailPersist =
+                                          emailController!.text;
+                                          FFAppState().nomePersist =
+                                          emailController!.text;
                                     });
                                     FFAppState().update(() {
                                       FFAppState().senha =
@@ -631,7 +635,7 @@ class _RegisterCopyWidgetState extends State<RegisterCopyWidget> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          'Senhas diferentes!',
+                                          'Verifique seus dados!',
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),

@@ -386,50 +386,20 @@ class _VagasEmpregoWidgetState extends State<VagasEmpregoWidget> {
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(0, 0,
                                                                     10, 0),
-                                                        child: Stack(
-                                                          children: [
-                                                            if (getJsonField(
-                                                                  resultItem,
-                                                                  r'''$..logo''',
-                                                                ) !=
-                                                                null)
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                child: Image
-                                                                    .network(
-                                                                  getJsonField(
-                                                                    resultItem,
-                                                                    r'''$..logo''',
-                                                                  ),
-                                                                  width: 55,
-                                                                  height: 55,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
+                                                        child: ClipRRect(
+                                                          borderRadius: BorderRadius.circular(5),
+                                                          child: Image.network(
+                                                            valueOrDefault<String>(
+                                                              getJsonField(
+                                                                resultItem,
+                                                                r'''$..logo''',
                                                               ),
-                                                            if (getJsonField(
-                                                                  resultItem,
-                                                                  r'''$..logo''',
-                                                                ) ==
-                                                                null)
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                child: Image
-                                                                    .network(
-                                                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC3Eu038Gt_v-K8OPe_-NzoA4a52_fggGhHR-8LiKM3bAWhQYG67vJdE9spJBCjWHzSo0&usqp=CAU',
-                                                                  width: 55,
-                                                                  height: 55,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ),
-                                                          ],
+                                                              'data:image/jpeg;base64,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',
+                                                            ),
+                                                            width: 55,
+                                                            height: 55,
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
                                                       ),
                                                       Column(
@@ -500,15 +470,7 @@ class _VagasEmpregoWidgetState extends State<VagasEmpregoWidget> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Expanded(
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            await launchURL(
-                                                                getJsonField(
-                                                              resultItem,
-                                                              r'''$..site''',
-                                                            ).toString());
-                                                          },
+                                                      Expanded(      
                                                           child: Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
@@ -538,7 +500,7 @@ class _VagasEmpregoWidgetState extends State<VagasEmpregoWidget> {
                                                                     r'''$..local''',
                                                                   ).toString()}  (${getJsonField(
                                                                     resultItem,
-                                                                    r'''$..regimeContratacao''',
+                                                                    r'''$..tipo''',
                                                                   ).toString()})',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
@@ -553,7 +515,7 @@ class _VagasEmpregoWidgetState extends State<VagasEmpregoWidget> {
                                                               ),
                                                             ],
                                                           ),
-                                                        ),
+                                                      
                                                       ),
                                                       Row(
                                                         mainAxisSize:

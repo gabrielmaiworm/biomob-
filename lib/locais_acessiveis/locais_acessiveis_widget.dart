@@ -2,6 +2,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../components/filtro_local_widget.dart';
 import '../components/tutorial_locais_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
+import '../flutter_flow/flutter_flow_model.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -13,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'locais_acessiveis_model.dart';
 
 class LocaisAcessiveisWidget extends StatefulWidget {
   const LocaisAcessiveisWidget({Key? key}) : super(key: key);
@@ -22,6 +24,7 @@ class LocaisAcessiveisWidget extends StatefulWidget {
 }
 
 class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
+  late LocaisAcessiveisModel _model;
   LatLng? currentUserLocationValue;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -31,8 +34,10 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => LocaisAcessiveisModel());
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
+    _model.textController ??= TextEditingController();
     textController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -41,6 +46,7 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
   void dispose() {
     _unfocusNode.dispose();
     textController?.dispose();
+    _model.dispose();
     super.dispose();
   }
 
@@ -108,7 +114,7 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                         return Padding(
                           padding: MediaQuery.of(context).viewInsets,
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 0.7,
+                            height: MediaQuery.of(context).size.height * 0.85,
                             child: TutorialLocaisWidget(),
                           ),
                         );
@@ -377,969 +383,374 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Stack(
-                                children: [
-                                  if (FFAppState().choiceType != 'hospedagem')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          FFAppState().update(() {
-                                            FFAppState().categoria = 'lodging';
-                                            FFAppState().choiceType =
-                                                'hospedagem';
-                                          });
-
-                                          context.pushNamed('LocaisAcessiveis');
-                                        },
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.4,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.05,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE6E6E6),
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 5, 5, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons.bed,
-                                                      color: Color(0xFF8F8E8E),
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      'Hospedagem',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: Color(
-                                                                    0xFF8F8E8E),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().choiceType = 'lodging';
+                                      FFAppState().categoria = 'lodging';
+                                    });
+                                    setState(() => _pagingController?.refresh());
+                                    await _model.waitForOnePage();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().choiceType == 'lodging'
+                                          ? FlutterFlowTheme.of(context).primaryColor
+                                          : FlutterFlowTheme.of(context).tertiaryColor,
+                                      FlutterFlowTheme.of(context).tertiaryColor,
+                                    ),
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              FaIcon(
+                                                FontAwesomeIcons.bed,
+                                                color: Colors.white,
+                                                size: 24,
                                               ),
-                                            ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                child: Text(
+                                                  'Hospedagem',
+                                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  if (FFAppState().choiceType == 'hospedagem')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .cor5,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.bed,
-                                                    color: Colors.white,
-                                                    size: 24,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    'Hospedagem',
-                                                    textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.white,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
+                                  ),
+                                ),
                               ),
-                              Stack(
-                                children: [
-                                  if (FFAppState().choiceType != 'restaurant')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          FFAppState().update(() {
-                                            FFAppState().categoria =
-                                                'restaurant';
-                                            FFAppState().choiceType =
-                                                'restaurant';
-                                          });
-
-                                          context.pushNamed('LocaisAcessiveis');
-                                        },
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.4,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.05,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE6E6E6),
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 5, 5, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Icon(
-                                                    Icons.restaurant,
-                                                    color: Color(0xFF8F8E8E),
-                                                    size: 24,
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      'Comer e Beber',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: Color(
-                                                                    0xFF8F8E8E),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().choiceType = 'restaurant';
+                                      FFAppState().categoria = 'restaurant';
+                                    });
+                                    setState(() => _pagingController?.refresh());
+                                    await _model.waitForOnePage();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().choiceType == 'restaurant'
+                                          ? FlutterFlowTheme.of(context).primaryColor
+                                          : FlutterFlowTheme.of(context).tertiaryColor,
+                                      FlutterFlowTheme.of(context).tertiaryColor,
+                                    ),
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                Icons.restaurant,
+                                                color: Colors.white,
+                                                size: 24,
                                               ),
-                                            ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                child: Text(
+                                                  'Comer e Beber',
+                                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  if (FFAppState().choiceType == 'restaurant')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .cor5,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Icon(
-                                                  Icons.restaurant,
-                                                  color: Colors.white,
-                                                  size: 24,
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    'Comer e Beber',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.white,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
+                                  ),
+                                ),
                               ),
-                              Stack(
-                                children: [
-                                  if (FFAppState().choiceType != 'saude')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          FFAppState().update(() {
-                                            FFAppState().categoria =
-                                                'health, pharmacy';
-                                            FFAppState().choiceType = 'saude';
-                                          });
-
-                                          context.pushNamed('LocaisAcessiveis');
-                                        },
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.48,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.05,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE6E6E6),
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 5, 5, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons
-                                                          .briefcaseMedical,
-                                                      color: Color(0xFF8F8E8E),
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      'Saúde e Bem-estar',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: Color(
-                                                                    0xFF8F8E8E),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().choiceType = 'health,pharmacy';
+                                      FFAppState().categoria = 'health,pharmacy';
+                                    });
+                                    setState(() => _pagingController?.refresh());
+                                    await _model.waitForOnePage();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().choiceType == 'health,pharmacy'
+                                          ? FlutterFlowTheme.of(context).primaryColor
+                                          : FlutterFlowTheme.of(context).tertiaryColor,
+                                      FlutterFlowTheme.of(context).tertiaryColor,
+                                    ),
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                Icons.local_hospital,
+                                                color: Colors.white,
+                                                size: 24,
                                               ),
-                                            ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                child: Text(
+                                                  'Saúde e bem-estar',
+                                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  if (FFAppState().choiceType == 'saude')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.48,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .cor5,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons
-                                                        .briefcaseMedical,
-                                                    color: Colors.white,
-                                                    size: 24,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    'Saúde e Bem-estar',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.white,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
+                                  ),
+                                ),
                               ),
-                              Stack(
-                                children: [
-                                  if (FFAppState().choiceType != 'service')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          FFAppState().update(() {
-                                            FFAppState().categoria = 'service';
-                                            FFAppState().choiceType = 'service';
-                                          });
-
-                                          context.pushNamed('LocaisAcessiveis');
-                                        },
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.48,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.05,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE6E6E6),
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 5, 5, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons.wrench,
-                                                      color: Color(0xFF8F8E8E),
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'Serviços',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF8F8E8E),
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().choiceType = 'service';
+                                      FFAppState().categoria = 'service';
+                                    });
+                                    setState(() => _pagingController?.refresh());
+                                    await _model.waitForOnePage();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().choiceType == 'service'
+                                          ? FlutterFlowTheme.of(context).primaryColor
+                                          : FlutterFlowTheme.of(context).tertiaryColor,
+                                      FlutterFlowTheme.of(context).tertiaryColor,
                                     ),
-                                  if (FFAppState().choiceType == 'service')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.48,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .cor5,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.wrench,
-                                                    color: Colors.white,
-                                                    size: 24,
-                                                  ),
-                                                ),
-                                                Text(
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              FaIcon(
+                                                FontAwesomeIcons.wrench,
+                                                color: Colors.white,
+                                                size: 24,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                child: Text(
                                                   'Serviços',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.white,
-                                                      ),
+                                                  style: FlutterFlowTheme.of(context).bodyText1,
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              Stack(
-                                children: [
-                                  if (FFAppState().choiceType != 'shop')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          FFAppState().update(() {
-                                            FFAppState().categoria = 'shop';
-                                            FFAppState().choiceType = 'shop';
-                                          });
-
-                                          context.pushNamed('LocaisAcessiveis');
-                                        },
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.48,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.05,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE6E6E6),
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 5, 5, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons.tshirt,
-                                                      color: Color(0xFF8F8E8E),
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'Varejo',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF8F8E8E),
-                                                        ),
-                                                  ),
-                                                ],
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  if (FFAppState().choiceType == 'shop')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.48,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .cor5,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.tshirt,
-                                                    color: Colors.white,
-                                                    size: 24,
-                                                  ),
-                                                ),
-                                                Text(
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().choiceType = 'shop';
+                                      FFAppState().categoria = 'shop';
+                                    });
+                                    setState(() => _pagingController?.refresh());
+                                    await _model.waitForOnePage();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().choiceType == 'shop'
+                                          ? FlutterFlowTheme.of(context).primaryColor
+                                          : FlutterFlowTheme.of(context).tertiaryColor,
+                                      FlutterFlowTheme.of(context).tertiaryColor,
+                                    ),
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              FaIcon(
+                                                FontAwesomeIcons.tshirt,
+                                                color: Colors.white,
+                                                size: 24,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                child: Text(
                                                   'Varejo',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.white,
-                                                      ),
+                                                  style: FlutterFlowTheme.of(context).bodyText1,
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              Stack(
-                                children: [
-                                  if (FFAppState().choiceType != 'event')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          FFAppState().update(() {
-                                            FFAppState().categoria = 'event';
-                                            FFAppState().choiceType = 'event';
-                                          });
-
-                                          context.pushNamed('LocaisAcessiveis');
-                                        },
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.48,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.05,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE6E6E6),
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 5, 5, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Icon(
-                                                    Icons.festival,
-                                                    color: Color(0xFF8F8E8E),
-                                                    size: 24,
-                                                  ),
-                                                  Text(
-                                                    'Eventos',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF8F8E8E),
-                                                        ),
-                                                  ),
-                                                ],
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  if (FFAppState().choiceType == 'event')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.48,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .cor5,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Icon(
-                                                  Icons.festival,
-                                                  color: Colors.white,
-                                                  size: 24,
-                                                ),
-                                                Text(
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().choiceType = 'event';
+                                      FFAppState().categoria = 'event';
+                                    });
+                                    setState(() => _pagingController?.refresh());
+                                    await _model.waitForOnePage();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().choiceType == 'event'
+                                          ? FlutterFlowTheme.of(context).primaryColor
+                                          : FlutterFlowTheme.of(context).tertiaryColor,
+                                      FlutterFlowTheme.of(context).tertiaryColor,
+                                    ),
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                Icons.festival,
+                                                color: Colors.white,
+                                                size: 24,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                child: Text(
                                                   'Eventos',
-                                                  textAlign: TextAlign.center,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.white,
-                                                      ),
+                                                  style: FlutterFlowTheme.of(context).bodyText1,
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              Stack(
-                                children: [
-                                  if (FFAppState().choiceType != 'transport')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          FFAppState().update(() {
-                                            FFAppState().categoria =
-                                                'transport';
-                                            FFAppState().choiceType =
-                                                'transport';
-                                          });
-
-                                          context.pushNamed('LocaisAcessiveis');
-                                        },
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.48,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.05,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFE6E6E6),
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5, 5, 5, 5),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons.bus,
-                                                      color: Color(0xFF8F8E8E),
-                                                      size: 24,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      'Transporte Público',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: Color(
-                                                                    0xFF8F8E8E),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  if (FFAppState().choiceType == 'transport')
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 10, 0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.48,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .cor5,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 5, 5, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0,0,5,0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.bus,
-                                                    color: Colors.white,
-                                                    size: 24,
-                                                  ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().choiceType = 'transport';
+                                      FFAppState().categoria = 'transport';
+                                    });
+                                    setState(() => _pagingController?.refresh());
+                                    await _model.waitForOnePage();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: valueOrDefault<Color>(
+                                      FFAppState().choiceType == 'transport'
+                                          ? FlutterFlowTheme.of(context).primaryColor
+                                          : FlutterFlowTheme.of(context).tertiaryColor,
+                                      FlutterFlowTheme.of(context).tertiaryColor,
+                                    ),
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              FaIcon(
+                                                FontAwesomeIcons.bus,
+                                                color: Colors.white,
+                                                size: 24,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                child: Text(
+                                                  'Transporte',
+                                                  style: FlutterFlowTheme.of(context).bodyText1,
                                                 ),
-                                                Expanded(
-                                                  child: Text(
-                                                    'Transporte Público',
-                                                    textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: Colors.white,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ),
+                      ), 
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 5, 10, 0),
                         child: Row(
@@ -1427,14 +838,17 @@ class _LocaisAcessiveisWidgetState extends State<LocaisAcessiveisWidget> {
                         scrollDirection: Axis.vertical,
                         builderDelegate: PagedChildBuilderDelegate<dynamic>(
                           // Customize what your widget looks like when it's loading the first page.
-                          firstPageProgressIndicatorBuilder: (_) => Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: SpinKitFadingCube(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                size: 50,
+                          firstPageProgressIndicatorBuilder: (_) => Padding(
+                            padding: const EdgeInsets.fromLTRB(0,150,0,0),
+                            child: Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: SpinKitFadingCube(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  size: 50,
+                                ),
                               ),
                             ),
                           ),
